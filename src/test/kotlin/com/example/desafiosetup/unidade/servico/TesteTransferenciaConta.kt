@@ -1,4 +1,4 @@
-package com.example.desafiosetup.teste.unidade.dominio.servico
+package com.example.desafiosetup.unidade.servico
 
 import com.example.desafiosetup.aplicacao.dominio.Conta
 import com.example.desafiosetup.aplicacao.dominio.NegocioException
@@ -56,8 +56,6 @@ class TesteTransferenciaConta {
 
         assertThat(contaDebito.saldo).isEqualTo(cem.subtract(vinte))
         assertThat(contaCredito.saldo).isEqualTo(cem.add(vinte))
-
-
     }
 
 }

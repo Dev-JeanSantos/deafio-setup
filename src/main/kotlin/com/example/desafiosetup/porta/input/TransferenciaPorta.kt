@@ -2,7 +2,7 @@ package com.example.desafiosetup.porta.input
 
 import java.math.BigDecimal
 
-interface PortaTransferencia {
+interface TransferenciaPorta {
 
     fun buscarConta(numeroConta: Int)
 

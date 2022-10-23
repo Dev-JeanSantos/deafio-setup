@@ -2,20 +2,19 @@ package com.example.desafiosetup.adapter.input
 
 import com.example.desafiosetup.aplicacao.dominio.Erro
 import com.example.desafiosetup.aplicacao.servico.Transferencia
-import com.example.desafiosetup.porta.input.PortaTransferencia
-import com.example.desafiosetup.porta.output.ContaRepositorio
+import com.example.desafiosetup.porta.input.TransferenciaPorta
+import com.example.desafiosetup.porta.output.ContaRepositorioPorta
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
-
 import java.util.Objects.isNull
 
 @Service
-class PortaTransferenciaImp: PortaTransferencia {
+class TransferenciaPortaImp: TransferenciaPorta {
 
-    private val repositorio: ContaRepositorio = TODO()
+    private val repositorio: ContaRepositorioPorta
     private val transferencia: Transferencia
 
-    constructor(repositorio: ContaRepositorio, transferencia: Transferencia){
+    constructor(repositorio: ContaRepositorioPorta, transferencia: Transferencia){
         this.repositorio = repositorio
         this.transferencia = transferencia
     }
@@ -51,8 +50,6 @@ class PortaTransferenciaImp: PortaTransferencia {
         transferencia.processar(valor, debito, credito)
         repositorio.alterar(debito)
         repositorio.alterar(credito)
-
-
 
     }
 }

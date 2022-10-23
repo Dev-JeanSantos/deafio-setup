@@ -1,4 +1,4 @@
-package com.example.desafiosetup.teste.unidade.dominio.modelo
+package com.example.desafiosetup.unidade.dominio.modelo
 
 import com.example.desafiosetup.aplicacao.dominio.Conta
 import com.example.desafiosetup.aplicacao.dominio.NegocioException
