@@ -1,7 +1,7 @@
 package com.example.desafiosetup.unidade.servico
 
-import com.example.desafiosetup.aplicacao.dominio.Conta
-import com.example.desafiosetup.aplicacao.dominio.NegocioException
+import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
+import com.example.desafiosetup.aplicacao.dominio.modelo.NegocioException
 import com.example.desafiosetup.aplicacao.servico.Transferencia
 import org.junit.jupiter.api.BeforeEach
 import java.math.BigDecimal
@@ -10,7 +10,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class TesteTransferenciaConta {
+class TesteTransferencia {
 
     private val cem: BigDecimal = BigDecimal(100)
     private val vinte: BigDecimal = BigDecimal(20)
@@ -56,6 +56,8 @@ class TesteTransferenciaConta {
 
         assertThat(contaDebito.saldo).isEqualTo(cem.subtract(vinte))
         assertThat(contaCredito.saldo).isEqualTo(cem.add(vinte))
+        println(contaCredito)
+        println(contaDebito)
     }
 
 }

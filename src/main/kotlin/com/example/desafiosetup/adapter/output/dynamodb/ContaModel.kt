@@ -1,6 +1,6 @@
 package com.example.desafiosetup.adapter.output.dynamodb
 
-import com.example.desafiosetup.aplicacao.dominio.Conta
+import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
 import java.math.BigDecimal
 import java.math.MathContext
 import javax.persistence.Entity

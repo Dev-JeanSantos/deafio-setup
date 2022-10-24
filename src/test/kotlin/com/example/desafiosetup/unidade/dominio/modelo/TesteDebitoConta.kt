@@ -1,7 +1,7 @@
 package com.example.desafiosetup.unidade.dominio.modelo
 
-import com.example.desafiosetup.aplicacao.dominio.Conta
-import com.example.desafiosetup.aplicacao.dominio.NegocioException
+import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
+import com.example.desafiosetup.aplicacao.dominio.modelo.NegocioException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

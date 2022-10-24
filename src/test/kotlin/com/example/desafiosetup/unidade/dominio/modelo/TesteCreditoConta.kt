@@ -1,7 +1,7 @@
 package com.example.desafiosetup.unidade.dominio.modelo
 
-import com.example.desafiosetup.aplicacao.dominio.Conta
-import com.example.desafiosetup.aplicacao.dominio.NegocioException
+import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
+import com.example.desafiosetup.aplicacao.dominio.modelo.NegocioException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -49,7 +49,6 @@ class TesteCreditoConta {
     fun `Deve retornar sucesso quando um valor de credito for valor positivo`() {
         contaValida.creditar((BigDecimal.ONE))
         var saldoFinal: BigDecimal = cem.add(BigDecimal.ONE)
-        println(contaValida.saldo)
         assertThat(contaValida.saldo).isEqualTo(saldoFinal)
     }
 }

@@ -1,26 +1,29 @@
 package com.example.desafiosetup.adapter.input
 
-import com.example.desafiosetup.aplicacao.dominio.Erro
+import com.example.desafiosetup.aplicacao.dominio.modelo.Erro
 import com.example.desafiosetup.aplicacao.servico.Transferencia
 import com.example.desafiosetup.porta.input.TransferenciaPorta
 import com.example.desafiosetup.porta.output.ContaRepositorioPorta
-import org.springframework.stereotype.Service
 import java.math.BigDecimal
 import java.util.Objects.isNull
+import javax.inject.Named
 
-@Service
+@Named
 class TransferenciaPortaImp: TransferenciaPorta {
 
-    private val repositorio: ContaRepositorioPorta
+    private val contaRepositorioPorta: ContaRepositorioPorta
     private val transferencia: Transferencia
 
     constructor(repositorio: ContaRepositorioPorta, transferencia: Transferencia){
-        this.repositorio = repositorio
+        this.contaRepositorioPorta = repositorio
         this.transferencia = transferencia
     }
 
-    override fun buscarConta(numeroConta: Int) {
-        repositorio.buscarConta(numeroConta)
+    override fun buscarConta(numeroConta: Int?) {
+        if (numeroConta != null) {
+            contaRepositorioPorta.buscarConta(numeroConta)
+        }
+        Erro.obrigatorio("O numero da conta ")
     }
 
     override fun transferir(contaCredito: Int, contaDebito: Int, valor: BigDecimal) {
@@ -34,8 +37,8 @@ class TransferenciaPortaImp: TransferenciaPorta {
             Erro.obrigatorio("O valor")
         }
 
-        var debito = repositorio.buscarConta(contaDebito)
-        var credito = repositorio.buscarConta(contaCredito)
+        var debito = contaRepositorioPorta.buscarConta(contaDebito)
+        var credito = contaRepositorioPorta.buscarConta(contaCredito)
         if (isNull(debito)){
             Erro.inexistente("Conta débito")
         }
@@ -48,8 +51,8 @@ class TransferenciaPortaImp: TransferenciaPorta {
         }
 
         transferencia.processar(valor, debito, credito)
-        repositorio.alterar(debito)
-        repositorio.alterar(credito)
+        contaRepositorioPorta.alterar(debito)
+        contaRepositorioPorta.alterar(credito)
 
     }
 }

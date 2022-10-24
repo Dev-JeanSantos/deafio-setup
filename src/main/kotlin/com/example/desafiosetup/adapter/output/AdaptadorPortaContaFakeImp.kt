@@ -2,15 +2,12 @@ package com.example.desafiosetup.adapter.output
 
 import com.example.desafiosetup.adapter.output.dynamodb.ContaRepository
 import com.example.desafiosetup.adapter.output.dynamodb.toContaModel
-import com.example.desafiosetup.aplicacao.dominio.Conta
-import com.example.desafiosetup.aplicacao.dominio.Erro
-import com.example.desafiosetup.aplicacao.dominio.NegocioException
+import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
+import com.example.desafiosetup.aplicacao.dominio.modelo.NegocioException
 import com.example.desafiosetup.porta.output.ContaRepositorioPorta
 import javax.inject.Named
 
 import java.util.Objects.isNull
-
-
 @Named
 class AdaptadorPortaContaFakeImp(
     private val contaRepository: ContaRepository
@@ -31,16 +28,12 @@ class AdaptadorPortaContaFakeImp(
     override fun alterar(conta: Conta?) {
 
         println("FAKE BANCO DE DADOS -> ALTERAR CONTA")
-        val cta = contaRepository.findById()
-        banco.get(conta?.numeroConta)
+        val cta = contaRepository.findByNumeroConta(conta?.numeroConta!!)
         if (!isNull(cta)) {
-            if (conta != null) {
-                banco[conta.numeroConta] = conta
-            }
-        } else {
+            contaRepository.save(conta.toContaModel()).toConta()
+        }else{
             throw NegocioException("Conta inexistente" + conta?.numeroConta)
         }
-
     }
 }
 

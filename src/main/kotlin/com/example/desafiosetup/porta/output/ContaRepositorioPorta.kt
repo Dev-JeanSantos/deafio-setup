@@ -1,6 +1,6 @@
 package com.example.desafiosetup.porta.output
 
-import com.example.desafiosetup.aplicacao.dominio.Conta
+import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
 
 interface ContaRepositorioPorta {
     fun salvar(conta: Conta): Conta

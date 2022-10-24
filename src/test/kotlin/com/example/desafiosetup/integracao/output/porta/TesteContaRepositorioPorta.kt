@@ -1,19 +1,14 @@
 package com.example.desafiosetup.integracao.output.porta
 
-import com.example.desafiosetup.aplicacao.dominio.Conta
-import com.example.desafiosetup.aplicacao.dominio.NegocioException
+import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
 import com.example.desafiosetup.integracao.BaseDatabaseIntegrationsTest
 import com.example.desafiosetup.porta.output.ContaRepositorioPorta
-import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import org.junit.jupiter.api.fail
 import org.springframework.beans.factory.annotation.Autowired
 import java.math.BigDecimal
 
-class ContaRepositorioPortaTeste: BaseDatabaseIntegrationsTest() {
+class TesteContaRepositorioPorta: BaseDatabaseIntegrationsTest() {
 
     @Autowired
     lateinit var contaRepositorioPorta: ContaRepositorioPorta
