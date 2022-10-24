@@ -9,8 +9,6 @@ services:
       - DOCKER_HOST=unix:///var/run/docker.sock
       - no_proxy=localhost,0.0.0.0
       - AWS_DEFAULT_REGION=us-east-1
-#      - AWS_ACCESS_KEY_ID=AKIAUEBQCJRMQYJ4OQXG
-#      - AWS_SECRET_ACCESS_KEY=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
     ports:
       - "4566-4566"
       - "4575-4575"
