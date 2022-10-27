@@ -14,7 +14,7 @@ class CorrentistaService(
     private val contaRepositorioPorta: ContaRepositorioPorta
 ) : SalvarCorrentistaUseCase {
     override fun salvarCorrentista(nome: String): CorrentistaResponse {
-        val novaConta = Conta(UUID.randomUUID().toString(), BigDecimal(100), nome)
+        val novaConta = contaRepositorioPorta.salvar(Conta(UUID.randomUUID().toString(), BigDecimal(100), nome))
         correntistaRepositorioPorta.salvar(Correntista(nome, novaConta))
         return CorrentistaResponse(nome, novaConta.numeroConta, novaConta.saldo)
     }
