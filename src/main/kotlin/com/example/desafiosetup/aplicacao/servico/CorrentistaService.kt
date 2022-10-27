@@ -6,9 +6,10 @@ import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
 import com.example.desafiosetup.porta.input.SalvarCorrentistaUseCase
 import com.example.desafiosetup.porta.output.ContaRepositorioPorta
 import com.example.desafiosetup.porta.output.CorrentistaRepositorioPorta
+import org.springframework.stereotype.Service
 import java.math.BigDecimal
 import java.util.UUID
-
+@Service
 class CorrentistaService(
     private val correntistaRepositorioPorta: CorrentistaRepositorioPorta,
     private val contaRepositorioPorta: ContaRepositorioPorta
