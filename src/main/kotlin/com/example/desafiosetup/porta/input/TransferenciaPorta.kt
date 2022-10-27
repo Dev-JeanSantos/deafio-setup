@@ -4,8 +4,8 @@ import java.math.BigDecimal
 
 interface TransferenciaPorta {
 
-    fun buscarConta(numeroConta: Int?)
+    fun buscarConta(numeroConta: String?)
 
-    fun transferir(contaCredito: Int, contaDebito: Int, valor: BigDecimal)
+    fun transferir(contaCredito: String, contaDebito: String, valor: BigDecimal)
 
 }

@@ -14,9 +14,20 @@ awslocal --no-verify-ssl sqs create-queue \
   --region=us-east-1 \
   --queue-name FakeQueue
 
+awslocal --no-verify-ssl sqs create-queue \
+  --region=us-east-1 \
+  --queue-name FakeQueue2
+
 awslocal --no-verify-ssl sns subscribe \
   --region=us-east-1 \
   --topic-arn arn:aws:sns:us-east-1:000000000000:data-ingestion \
   --protocol sqs \
   --notification-endpoint arn:aws:sqs:us-east-1:000000000000:FakeQueue \
+  --attributes '{"RawMessageDelivery": "true"}'
+
+awslocal --no-verify-ssl sns subscribe \
+  --region=us-east-1 \
+  --topic-arn arn:aws:sns:us-east-1:000000000000:data-ingestion \
+  --protocol sqs \
+  --notification-endpoint arn:aws:sqs:us-east-1:000000000000:FakeQueue2 \
   --attributes '{"RawMessageDelivery": "true"}'

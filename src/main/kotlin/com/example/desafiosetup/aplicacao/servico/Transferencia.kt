@@ -8,7 +8,6 @@ import java.util.Objects.isNull
 
 @Service
 class Transferencia {
-
     fun processar(valor: BigDecimal?, debito: Conta?, credito: Conta?){
 
         if (isNull(valor)){
