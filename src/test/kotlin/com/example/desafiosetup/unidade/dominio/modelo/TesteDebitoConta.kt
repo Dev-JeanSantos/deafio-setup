@@ -15,7 +15,7 @@ class TesteDebitoConta {
 
     @BeforeEach
     fun setup() {
-        contaValida = Conta(10, cem, "Jean Santos")
+        contaValida = Conta("10", cem, "Jean Santos")
     }
 
     @Test

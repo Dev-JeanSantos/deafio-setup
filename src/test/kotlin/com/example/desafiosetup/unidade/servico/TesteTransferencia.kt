@@ -20,8 +20,8 @@ class TesteTransferencia {
 
     @BeforeEach
     fun setup(){
-        contaDebito = Conta(1, cem, "Jean Santos")
-        contaCredito = Conta(2, cem, "Camilla Santos")
+        contaDebito = Conta("1", cem, "Jean Santos")
+        contaCredito = Conta("2", cem, "Camilla Santos")
         transferencia = Transferencia()
     }
 

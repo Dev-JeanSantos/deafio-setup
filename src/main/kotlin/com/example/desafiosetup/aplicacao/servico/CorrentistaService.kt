@@ -3,9 +3,9 @@ package com.example.desafiosetup.aplicacao.servico
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
-import com.example.desafiosetup.porta.input.SalvarCorrentistaUseCase
-import com.example.desafiosetup.porta.output.ContaRepositorioPorta
-import com.example.desafiosetup.porta.output.CorrentistaRepositorioPorta
+import com.example.desafiosetup.aplicacao.porta.input.SalvarCorrentistaUseCase
+import com.example.desafiosetup.aplicacao.porta.output.ContaRepositorioPorta
+import com.example.desafiosetup.aplicacao.porta.output.CorrentistaRepositorioPorta
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 import java.util.UUID

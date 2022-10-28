@@ -5,7 +5,7 @@ import com.example.desafiosetup.adapter.output.dynamodb.ContaRepository
 import com.example.desafiosetup.adapter.output.dynamodb.toContaModel
 import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
 import com.example.desafiosetup.aplicacao.dominio.modelo.NegocioException
-import com.example.desafiosetup.porta.output.ContaRepositorioPorta
+import com.example.desafiosetup.aplicacao.porta.output.ContaRepositorioPorta
 import javax.inject.Named
 
 import java.util.Objects.isNull

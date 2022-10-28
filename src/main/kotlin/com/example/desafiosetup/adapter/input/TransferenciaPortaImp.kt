@@ -2,8 +2,8 @@ package com.example.desafiosetup.adapter.input
 
 import com.example.desafiosetup.aplicacao.dominio.modelo.Erro
 import com.example.desafiosetup.aplicacao.servico.Transferencia
-import com.example.desafiosetup.porta.input.TransferenciaPorta
-import com.example.desafiosetup.porta.output.ContaRepositorioPorta
+import com.example.desafiosetup.aplicacao.porta.input.TransferenciaPorta
+import com.example.desafiosetup.aplicacao.porta.output.ContaRepositorioPorta
 import java.math.BigDecimal
 import java.util.Objects.isNull
 import javax.inject.Inject

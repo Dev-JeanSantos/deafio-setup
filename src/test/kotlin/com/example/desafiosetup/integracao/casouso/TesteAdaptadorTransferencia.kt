@@ -2,7 +2,7 @@ package com.example.desafiosetup.integracao.casouso
 
 import com.example.desafiosetup.aplicacao.dominio.modelo.NegocioException
 import com.example.desafiosetup.integracao.BaseDatabaseIntegrationsTest
-import com.example.desafiosetup.porta.input.TransferenciaPorta
+import com.example.desafiosetup.aplicacao.porta.input.TransferenciaPorta
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
