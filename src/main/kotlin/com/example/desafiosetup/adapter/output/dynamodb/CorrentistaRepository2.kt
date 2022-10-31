@@ -14,5 +14,4 @@ class CorrentistaRepository2(
         dynamoDBMapper.save(correntista.toModel())
         return correntista
     }
-
 }
