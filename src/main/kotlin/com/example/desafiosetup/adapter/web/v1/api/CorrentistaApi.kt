@@ -1,7 +1,6 @@
 package com.example.desafiosetup.adapter.web.v1.api
 
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
-import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import org.springframework.http.HttpStatus
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,6 +14,5 @@ interface CorrentistaApi {
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    fun salvarCliente(@RequestBody @Validated clienteRequest: CorrentistaRequest): CorrentistaResponse
-
+    fun salvarCliente(@RequestBody @Validated clienteRequest: CorrentistaRequest)
 }
