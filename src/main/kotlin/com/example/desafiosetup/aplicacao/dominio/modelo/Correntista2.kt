@@ -1,7 +1,7 @@
 package com.example.desafiosetup.aplicacao.dominio.modelo
 
-import com.example.desafiosetup.adapter.output.dynamodb.CorrentistaModel
 import com.example.desafiosetup.adapter.output.dynamodb.CorrentistaModel2
+import java.util.*
 
 class Correntista2(
     val nome: String,
@@ -9,9 +9,9 @@ class Correntista2(
 ){
     fun toModel(): CorrentistaModel2{
         return CorrentistaModel2(
-                pk = "CORRENTISTA#${this.nome}",
+                pk = "CORRENTISTA#${UUID.randomUUID()}",
                 nome = this.nome,
-                conta = this.conta
+                conta = "SALDO: R$${this.conta}"
         )
     }
 }

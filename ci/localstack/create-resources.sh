@@ -1,8 +1,6 @@
 export DEFAULT_REGION=us-east-1
 export AWS_DEFAULT_REGION=us-east-1
-
 #!/bin/bash
-
 echo "[INFO] - DESAFIO - SETUP LOCALSTACK"
 
 ## SNS
@@ -27,4 +25,4 @@ awslocal --no-verify-ssl sns subscribe \
 
 
 echo "[INFO] - CRIAÇÃO DO DYNAMODB"
-aws --endpoint-url http://localhost:4586 --region us-east-1 dynamodb create-table --cli-input-json file://dynamo-table.json
+#aws --endpoint-url http://localhost:4566 --region us-east-1 dynamodb create-table --cli-input-json file://dynamo-table.json
