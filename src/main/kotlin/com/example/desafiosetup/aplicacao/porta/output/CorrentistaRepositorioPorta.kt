@@ -4,4 +4,6 @@ import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
 
 interface CorrentistaRepositorioPorta {
     fun salvar(correntista: Correntista): Correntista
+
+    fun buscarCorrentistaPorNumeroConta(numeroConta: String): Correntista
 }

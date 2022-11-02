@@ -21,6 +21,14 @@ class ContaService: TransferenciaContaUseCase {
         if (isNull(contaCredito)){
             obrigatorio("Conta Crédito ")
         }
+
+//        try{
+//            contaCredito.
+//        }
+
+
+
+
 //
 //        contaDebito?.debitar(valor)
 //        contaCredito?.creditar(valor)
