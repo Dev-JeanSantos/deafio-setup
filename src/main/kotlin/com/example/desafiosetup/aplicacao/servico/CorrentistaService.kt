@@ -21,7 +21,9 @@ class CorrentistaService(
 
     override fun buscar(numeroConta: String): Correntista {
        try {
-           return correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(numeroConta)
+           println("passei aqui")
+           val possivelCorrentista = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(numeroConta)
+           return possivelCorrentista
        }catch (e: NegocioException){
            throw e
        }
