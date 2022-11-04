@@ -7,7 +7,7 @@ import java.math.BigDecimal
 import java.util.Objects.isNull
 
 @Service
-class Transferencia {
+class TransferenciaService {
     fun processar(valor: BigDecimal?, debito: Conta?, credito: Conta?){
 
         if (isNull(valor)){
