@@ -3,6 +3,7 @@ package com.example.desafiosetup.adapter.web.v1.controller
 import com.example.desafiosetup.adapter.web.v1.api.CorrentistaApi
 import com.example.desafiosetup.adapter.web.v1.converter.toResponse
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
+import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.aplicacao.porta.input.CorrentistaUseCase
 import com.example.desafiosetup.aplicacao.porta.input.TransferenciaContaUseCase
@@ -27,8 +28,8 @@ class CorrentistaApiController(
        return correntistaUseCase.buscar(numeroConta).toResponse()
     }
 
-    override fun transferenciaConta(@RequestBody contaCredito: String, contaDebito: String, valor: BigDecimal): CorrentistaResponse {
-        return correntistaUseCase.transferir(contaCredito, contaDebito, valor).toResponse()
+    override fun transferenciaConta(transferenciaRequest: TransferenciaRequest): CorrentistaResponse {
+        return correntistaUseCase.transferir(transferenciaRequest).toResponse()
     }
 
 }

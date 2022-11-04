@@ -7,6 +7,7 @@ import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaMode
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
 import com.example.desafiosetup.aplicacao.porta.output.CorrentistaRepositorioPorta
 import org.springframework.stereotype.Repository
+import java.math.BigDecimal
 
 @Repository
 class CorrentistaRepository(
