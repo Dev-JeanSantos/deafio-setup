@@ -1,17 +1,29 @@
 package com.example.desafiosetup.aplicacao.dominio.modelo
 
+import com.example.desafiosetup.adapter.output.dynamodb.entidade.ContaModel
 import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaModel
+import java.math.BigDecimal
 import java.util.UUID
 
-class Correntista(
+data class Correntista(
     val nome: String,
-    val conta: String
+    val conta: ContaType = ContaType(BigDecimal.ZERO),
+    val idCorrentista: String = "CORRENTISTA_${UUID.randomUUID()}"
 ){
     fun toModel(): CorrentistaModel {
         return CorrentistaModel(
-                pk = "CORRENTISTA_${UUID.randomUUID()}",
+                pk = this.idCorrentista,
                 nome = this.nome,
-                conta = "SALDO: R$${this.conta}"
+                conta = this.conta.toModel()
         )
     }
+}
+
+data class ContaType(
+    val saldo: BigDecimal,
+    val numero: String = "CONTA_${UUID.randomUUID()}"
+)
+
+fun ContaType.toModel(): ContaModel {
+    return ContaModel(this.saldo, this.numero)
 }

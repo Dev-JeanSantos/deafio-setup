@@ -19,7 +19,7 @@ class CorrentistaApiController(
     private val transferenciaContaUseCase: TransferenciaContaUseCase
 ):CorrentistaApi{
 
-    override fun salvarConta(correntistaRequest: CorrentistaRequest){
+    override fun salvarConta(correntistaRequest: CorrentistaRequest): CorrentistaResponse{
         return salvarCorrentistaUseCase.salvarCorrentista(correntistaRequest)
     }
 

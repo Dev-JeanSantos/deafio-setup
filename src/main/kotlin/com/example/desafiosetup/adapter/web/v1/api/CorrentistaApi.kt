@@ -20,7 +20,7 @@ interface CorrentistaApi {
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    fun salvarConta(@RequestBody @Validated clienteRequest: CorrentistaRequest)
+    fun salvarConta(@RequestBody @Validated clienteRequest: CorrentistaRequest): CorrentistaResponse
 
     @GetMapping("/{numeroConta}")
     @ResponseBody

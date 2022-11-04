@@ -14,6 +14,7 @@ fun TransferenciaRequest.toDomain() = Conta(
 
 fun Correntista.toResponse() = CorrentistaResponse(
         nome = this.nome,
-        saldo = this.conta.toBigDecimal(),
+        saldo = this.conta.saldo,
+        idCorrentista = this.idCorrentista,
         numeroConta = this.nome
 )

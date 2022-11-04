@@ -11,6 +11,8 @@ localstack:
     - AWS_DEFAULT_REGION=us-east-1
     - DEBUG=1
     - no_proxy=localhost,0.0.0.0
+    - AWS_ACCESS_KEY_ID=jean
+    - AWS_SECRET_ACCESS_KEY=jean
   volumes:
     - "./ci/localstack:/docker-entrypoint-initaws.d"
-#    - "/var/run/docker.sock:/var/run/docker.sock"
+    - "./ci/localstack/files:/files"
