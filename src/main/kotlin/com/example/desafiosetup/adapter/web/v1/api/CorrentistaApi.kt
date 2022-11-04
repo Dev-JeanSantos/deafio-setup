@@ -31,5 +31,5 @@ interface CorrentistaApi {
 
     @PatchMapping("/transferencias")
     @ResponseStatus(HttpStatus.OK)
-    fun transferenciaConta(@RequestBody contaCredito: String, contaDebito: String, valor: BigDecimal)
+    fun transferenciaConta(@RequestBody contaCredito: String, contaDebito: String, valor: BigDecimal): CorrentistaResponse
 }

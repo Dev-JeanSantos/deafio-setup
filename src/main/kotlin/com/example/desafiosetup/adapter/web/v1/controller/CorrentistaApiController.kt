@@ -4,7 +4,7 @@ import com.example.desafiosetup.adapter.web.v1.api.CorrentistaApi
 import com.example.desafiosetup.adapter.web.v1.converter.toResponse
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
-import com.example.desafiosetup.aplicacao.porta.input.SalvarCorrentistaUseCase
+import com.example.desafiosetup.aplicacao.porta.input.CorrentistaUseCase
 import com.example.desafiosetup.aplicacao.porta.input.TransferenciaContaUseCase
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestBody
@@ -14,21 +14,21 @@ import java.math.BigDecimal
 @RestController
 class CorrentistaApiController(
     @Autowired
-    private val salvarCorrentistaUseCase: SalvarCorrentistaUseCase,
+    private val correntistaUseCase: CorrentistaUseCase,
     @Autowired
     private val transferenciaContaUseCase: TransferenciaContaUseCase
 ):CorrentistaApi{
 
     override fun salvarConta(correntistaRequest: CorrentistaRequest): CorrentistaResponse{
-        return salvarCorrentistaUseCase.salvarCorrentista(correntistaRequest)
+        return correntistaUseCase.salvarCorrentista(correntistaRequest)
     }
 
     override fun buscarCorrentista(numeroConta: String): CorrentistaResponse {
-       return salvarCorrentistaUseCase.buscar(numeroConta).toResponse()
+       return correntistaUseCase.buscar(numeroConta).toResponse()
     }
 
-    override fun transferenciaConta(@RequestBody contaCredito: String, contaDebito: String, valor: BigDecimal) {
-        return transferenciaContaUseCase.transferir(contaCredito, contaDebito, valor)
+    override fun transferenciaConta(@RequestBody contaCredito: String, contaDebito: String, valor: BigDecimal): CorrentistaResponse {
+        return correntistaUseCase.transferir(contaCredito, contaDebito, valor).toResponse()
     }
 
 }

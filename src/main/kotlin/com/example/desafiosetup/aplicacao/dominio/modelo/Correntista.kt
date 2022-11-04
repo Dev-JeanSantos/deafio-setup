@@ -7,7 +7,7 @@ import java.util.UUID
 
 data class Correntista(
     val nome: String,
-    val conta: ContaType = ContaType(BigDecimal.ZERO),
+    val conta: ContaType = ContaType(BigDecimal(100)),
     val idCorrentista: String = "CORRENTISTA_${UUID.randomUUID()}"
 ){
     fun toModel(): CorrentistaModel {
