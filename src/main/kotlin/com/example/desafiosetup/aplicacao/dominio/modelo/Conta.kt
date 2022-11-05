@@ -5,6 +5,7 @@ import com.example.desafiosetup.aplicacao.dominio.modelo.Erro.Companion.saldoIns
 import java.math.BigDecimal
 import java.util.Objects.isNull
 
+
 data class Conta(
     val numeroConta: String,
     var saldo: BigDecimal,
@@ -18,6 +19,7 @@ data class Conta(
         }
 
         saldo = saldo.add(credito)
+        println("saldoCredito: ${saldo}")
     }
 
     fun  debitar(debito: BigDecimal?){
@@ -32,6 +34,7 @@ data class Conta(
         }
 
         saldo = saldo.subtract(debito)
+        println("saldoDebito: ${saldo}")
 
     }
 }

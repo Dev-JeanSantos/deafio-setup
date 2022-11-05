@@ -1,10 +1,8 @@
 package com.example.desafiosetup.adapter.web.v1.api
 
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
-import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import org.springframework.http.HttpStatus
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
@@ -21,10 +19,4 @@ interface CorrentistaApi {
     fun buscarCorrentista(
         @PathVariable numeroConta: String
     ): CorrentistaResponse
-
-    @PutMapping("/transferencias")
-    @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
-    fun transferenciaConta(@RequestBody @Valid transferenciaRequest: TransferenciaRequest): CorrentistaResponse
-
 }

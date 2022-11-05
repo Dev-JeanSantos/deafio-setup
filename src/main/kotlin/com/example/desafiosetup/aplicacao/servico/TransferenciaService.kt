@@ -22,6 +22,5 @@ class TransferenciaService {
 
         debito?.debitar(valor)
         credito?.creditar(valor)
-
     }
 }
