@@ -5,7 +5,7 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication
-@ComponentScan(basePackages = arrayOf("com.example.desafiosetup", "com.example.desafiosetup.adapter.input"))
+@ComponentScan(basePackages = arrayOf("com.example.desafiosetup", "com.example.desafiosetup.adapter.input", "com.example.desafiosetup.adapter.sns.config"))
 class DesafioSetupApplication
 
 fun main(args: Array<String>) {
