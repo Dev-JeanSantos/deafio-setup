@@ -8,7 +8,7 @@ echo "[INFO] - DESAFIO - SETUP LOCALSTACK"
 echo "[INFO] - CRIAÇÃO SNS"
 awslocal --no-verify-ssl sns create-topic \
   --region=us-east-1 \
-  --name data-sns
+  --name transfer-completed-SNS
 
 echo "[INFO] - CRIAÇÃO SQS"
 awslocal --no-verify-ssl sqs create-queue \
@@ -18,7 +18,7 @@ awslocal --no-verify-ssl sqs create-queue \
 echo "[INFO] - CRIAÇÃO SUBSCRIBE"
 awslocal --no-verify-ssl sns subscribe \
   --region=us-east-1 \
-  --topic-arn arn:aws:sns:us-east-1:000000000000:data-sns \
+  --topic-arn arn:aws:sns:us-east-1:000000000000:transfer-completed-SNS \
   --protocol sqs \
   --notification-endpoint arn:aws:sqs:us-east-1:000000000000:data-sqs \
   --attributes '{"RawMessageDelivery": "true"}'
