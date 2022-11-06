@@ -1,4 +1,4 @@
-package com.example.desafiosetup.adapter.sns.service
+package com.example.desafiosetup.adapter.sns
 
 import com.amazonaws.services.sns.AmazonSNS
 import com.amazonaws.services.sns.model.PublishRequest

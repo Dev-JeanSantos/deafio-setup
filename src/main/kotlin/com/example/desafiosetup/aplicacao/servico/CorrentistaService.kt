@@ -1,7 +1,7 @@
 package com.example.desafiosetup.aplicacao.servico
 
 import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaModel
-import com.example.desafiosetup.adapter.web.v1.converter.toResponse
+import com.example.desafiosetup.adapter.sns.DataLakePublisher
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
@@ -10,16 +10,21 @@ import com.example.desafiosetup.aplicacao.dominio.modelo.NegocioException
 import com.example.desafiosetup.aplicacao.porta.input.CorrentistaUseCase
 import com.example.desafiosetup.aplicacao.porta.output.CorrentistaRepositorioPorta
 import org.springframework.stereotype.Service
-import java.math.BigDecimal
 
 @Service
 class CorrentistaService(
     private val correntistaRepositorioPorta: CorrentistaRepositorioPorta,
-) : CorrentistaUseCase {
+    private val datalakePublisher: DataLakePublisher,
+
+
+    ) : CorrentistaUseCase {
 
     override fun salvarCorrentista(correntistaRequest: CorrentistaRequest): CorrentistaResponse {
         val correntista = Correntista(correntistaRequest.nome)
         val resposta = correntistaRepositorioPorta.salvar(correntista)
+
+//        notificacao.EnviarNotificacaoTransferencia(resposta)
+        datalakePublisher.envioTransferencia(resposta)
         return CorrentistaResponse(
                 nome = resposta.nome,
                 numeroConta = resposta.conta.numero,
@@ -38,10 +43,12 @@ class CorrentistaService(
     }
 
     override fun transferir(transferenciaRequest: TransferenciaRequest): CorrentistaModel {
-        val possivelContaDebito = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaDebito)
+        val possivelContaDebito =
+            correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaDebito)
 
-        if (possivelContaDebito.conta.saldo >= transferenciaRequest.valor){
-            val possivelContaCredito = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaCredito)
+        if (possivelContaDebito.conta.saldo >= transferenciaRequest.valor) {
+            val possivelContaCredito =
+                correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaCredito)
             val adicionarSaldo = possivelContaCredito.conta.saldo.add(transferenciaRequest.valor)
             val subtrairSaldo = possivelContaDebito.conta.saldo.subtract(transferenciaRequest.valor)
             return possivelContaCredito
