@@ -23,5 +23,6 @@ awslocal --no-verify-ssl sns subscribe \
   --notification-endpoint arn:aws:sqs:us-east-1:000000000000:data-sqs \
   --attributes '{"RawMessageDelivery": "true"}'
 
+# Consertado o comando para criar o dynamo
 echo "[INFO] - CRIAÇÃO DO DYNAMODB"
-aws --endpoint-url http://localhost:4566 --region us-east-1 dynamodb create-table --cli-input-json file:///files/dynamo-table.json
+awslocal --no-verify-ssl --region us-east-1 dynamodb create-table --cli-input-json file://files/dynamo-table.json

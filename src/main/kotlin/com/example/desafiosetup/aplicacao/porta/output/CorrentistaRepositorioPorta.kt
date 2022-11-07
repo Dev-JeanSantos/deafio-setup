@@ -7,4 +7,6 @@ interface CorrentistaRepositorioPorta {
     fun salvar(correntista: Correntista): Correntista
 
     fun buscarCorrentistaPorNumeroConta(numeroConta: String): CorrentistaModel
+
+    fun transferirValoresEntreContas(debito: CorrentistaModel, credito: CorrentistaModel): CorrentistaModel
 }

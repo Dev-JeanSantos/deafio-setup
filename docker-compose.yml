@@ -1,18 +1,20 @@
-localstack:
-  image: localstack/localstack:latest
-  ports:
-    - "4566-4586:4566-4586"
-    - "8055:8080"
-  environment:
-    - EXTRA_CORS_ALLOWED_ORIGINS=app://.
-    - HOSTNAME_EXTERNAL=localstack
-    - SERVICES=sqs,sns,dynamodb
-    - DOCKER_HOST=unix:///var/run/docker.sock
-    - AWS_DEFAULT_REGION=us-east-1
-    - DEBUG=1
-    - no_proxy=localhost,0.0.0.0
-    - AWS_ACCESS_KEY_ID=jean
-    - AWS_SECRET_ACCESS_KEY=jean
-  volumes:
-    - "./ci/localstack:/docker-entrypoint-initaws.d"
-    - "./ci/localstack/files:/files"
+# Adicionado bloco de services faltando
+services:
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566-4586:4566-4586"
+      - "8055:8080"
+    environment:
+      - EXTRA_CORS_ALLOWED_ORIGINS=app://.
+      - HOSTNAME_EXTERNAL=localstack
+      - SERVICES=sqs,sns,dynamodb
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - AWS_DEFAULT_REGION=us-east-1
+      - DEBUG=1
+      - no_proxy=localhost,0.0.0.0
+      - AWS_ACCESS_KEY_ID=jean
+      - AWS_SECRET_ACCESS_KEY=jean
+    volumes:
+      - "./ci/localstack:/docker-entrypoint-initaws.d"
+      - "./ci/localstack/files:/files"
