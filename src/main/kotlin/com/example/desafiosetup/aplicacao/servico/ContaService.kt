@@ -2,6 +2,7 @@ package com.example.desafiosetup.aplicacao.servico
 
 import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaModel
 import com.example.desafiosetup.adapter.sns.DataLakePublisher
+import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
@@ -52,5 +53,11 @@ class ContaService(
 
         return correntistaRepositorioPorta.transferirValoresEntreContas(debitoNovoSaldo, creditoNovoSaldo)
             .toResponse()
+    }
+
+    override fun confirmarTransferencia(correntistaRequest: CorrentistaRequest): CorrentistaResponse {
+        val contaConfirmadaTransferencia = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(correntistaRequest.toString())
+//        val conta = contaConfirmadaTransferencia.updateStatus()
+        return correntistaRepositorioPorta.confirmarTransferencia(contaConfirmadaTransferencia)
     }
 }

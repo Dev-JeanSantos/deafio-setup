@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaModel
+import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
 import com.example.desafiosetup.aplicacao.porta.output.CorrentistaRepositorioPorta
 import org.springframework.stereotype.Repository
@@ -34,5 +35,10 @@ class CorrentistaRepository(
         dynamoDBMapper.save(credito)
         // Retorna a entidade de quem recebeu o credito
         return credito
+    }
+
+    override fun confirmarTransferencia(contaConfirmadaTransferencia: CorrentistaModel): CorrentistaResponse {
+        dynamoDBMapper.save(contaConfirmadaTransferencia)
+        return contaConfirmadaTransferencia.toResponse()
     }
 }

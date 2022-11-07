@@ -1,5 +1,6 @@
 package com.example.desafiosetup.adapter.web.v1.api
 
+import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import org.springframework.http.HttpStatus
@@ -13,5 +14,11 @@ interface ContaApi {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     fun transferenciaConta(@RequestBody @Valid transferenciaRequest: TransferenciaRequest): CorrentistaResponse
+
+    @PutMapping("/confirmar_transferencias")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    fun confirmaTransferenciaConta(@RequestBody @Valid correntistaRequest: CorrentistaRequest): CorrentistaResponse
+
 
 }

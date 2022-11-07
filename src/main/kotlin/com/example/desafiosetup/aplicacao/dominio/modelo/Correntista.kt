@@ -8,7 +8,7 @@ import java.util.UUID
 data class Correntista(
     val nome: String,
     val conta: ContaType = ContaType(BigDecimal(100)),
-    val idCorrentista: String = "CORRENTISTA_${UUID.randomUUID()}"
+    val idCorrentista: String = "CORRENTISTA_${UUID.randomUUID()}",
 ){
     fun toModel(): CorrentistaModel {
         return CorrentistaModel(
@@ -21,9 +21,10 @@ data class Correntista(
 
 data class ContaType(
     val saldo: BigDecimal,
-    val numero: String = "CONTA_${UUID.randomUUID()}"
+    val numero: String = "CONTA_${UUID.randomUUID()}",
+    val status: Status = Status.PENDENTE
 )
 
 fun ContaType.toModel(): ContaModel {
-    return ContaModel(this.saldo, this.numero)
+    return ContaModel(this.saldo, this.numero, this.status)
 }

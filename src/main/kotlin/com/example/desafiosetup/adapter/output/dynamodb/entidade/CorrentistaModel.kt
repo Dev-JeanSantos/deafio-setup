@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.*
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
+import com.example.desafiosetup.aplicacao.dominio.modelo.Status
 import java.math.BigDecimal
 
 @DynamoDBTable(tableName = "ContaCorrente")
@@ -16,14 +17,14 @@ data class CorrentistaModel(
     @DynamoDBAttribute(attributeName = "nome")
     var nome: String = "",
     @DynamoDBAttribute(attributeName = "conta")
-    var conta: ContaModel = ContaModel(BigDecimal.ZERO)
+    var conta: ContaModel = ContaModel(BigDecimal.ZERO, status = Status.PENDENTE)
 ) {
-    fun toResponse():CorrentistaResponse{
-        return CorrentistaResponse(this.nome,this.conta.numero,this.pk,this.conta.saldo)
+    fun toResponse(): CorrentistaResponse {
+        return CorrentistaResponse(this.nome, this.conta.numero, this.pk, this.conta.saldo)
     }
 
     fun toConta() = Conta(
-           numeroConta =  conta.numero,
+            numeroConta = conta.numero,
             saldo = conta.saldo,
             correntista = nome
     )
@@ -32,7 +33,5 @@ data class CorrentistaModel(
             nome = this.nome,
             idCorrentista = this.conta.numero,
             conta = this.conta.toDomain()
-
-
     )
 }
