@@ -25,3 +25,4 @@ awslocal --no-verify-ssl sns subscribe \
 
 echo "[INFO] - CRIAÇÃO DO DYNAMODB"
 aws --endpoint-url http://localhost:4566 --region us-east-1 dynamodb create-table --cli-input-json file:///files/dynamo-table.json
+#awslocal --endpoint-url http://localhost:4566 --no-verify-ssl --region us-east-1 dynamodb create-table --cli-input-json file://files/dynamo-table.json

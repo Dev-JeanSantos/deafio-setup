@@ -10,5 +10,4 @@ interface CorrentistaUseCase {
     fun salvarCorrentista(correntistaRequest: CorrentistaRequest): CorrentistaResponse
 
     fun buscar(numeroConta: String): CorrentistaModel
-    fun transferir(transferenciaRequest: TransferenciaRequest): CorrentistaModel
 }

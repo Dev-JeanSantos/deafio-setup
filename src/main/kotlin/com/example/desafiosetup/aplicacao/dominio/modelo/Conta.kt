@@ -1,5 +1,6 @@
 package com.example.desafiosetup.aplicacao.dominio.modelo
 
+import com.example.desafiosetup.adapter.output.dynamodb.entidade.ContaModel
 import com.example.desafiosetup.aplicacao.dominio.modelo.Erro.Companion.obrigatorio
 import com.example.desafiosetup.aplicacao.dominio.modelo.Erro.Companion.saldoInsuficiente
 import java.math.BigDecimal
@@ -37,4 +38,8 @@ data class Conta(
         println("saldoDebito: ${saldo}")
 
     }
+}
+
+fun Conta.toModel(): ContaModel {
+    return ContaModel(this.saldo, this.numeroConta)
 }

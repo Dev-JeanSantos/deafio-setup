@@ -41,20 +41,4 @@ class CorrentistaService(
             throw e
         }
     }
-
-    override fun transferir(transferenciaRequest: TransferenciaRequest): CorrentistaModel {
-        val possivelContaDebito =
-            correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaDebito)
-
-        if (possivelContaDebito.conta.saldo >= transferenciaRequest.valor) {
-            val possivelContaCredito =
-                correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaCredito)
-            val adicionarSaldo = possivelContaCredito.conta.saldo.add(transferenciaRequest.valor)
-            val subtrairSaldo = possivelContaDebito.conta.saldo.subtract(transferenciaRequest.valor)
-            return possivelContaCredito
-        }
-        return possivelContaDebito
-//                correntistaRepositorioPorta.salvar(possivelContaCredito).toModel()
-//                correntistaRepositorioPorta.salvar(conDebito).toModel()
-    }
 }

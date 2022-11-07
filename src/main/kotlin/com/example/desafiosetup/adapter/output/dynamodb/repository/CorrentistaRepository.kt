@@ -27,4 +27,12 @@ class CorrentistaRepository(
                     .withExpressionAttributeValues(mapOf(":pk" to AttributeValue().withS(numeroConta)))
         ).first()
     }
+
+    override fun transferirValoresEntreContas(debito: CorrentistaModel, credito: CorrentistaModel): CorrentistaModel {
+        // Recebe o modelo do objeto já com saldo atualizado e atualiza
+        dynamoDBMapper.save(debito)
+        dynamoDBMapper.save(credito)
+        // Retorna a entidade de quem recebeu o credito
+        return credito
+    }
 }

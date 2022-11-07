@@ -3,6 +3,7 @@ package com.example.desafiosetup.adapter.output.dynamodb.entidade
 import com.amazonaws.services.dynamodbv2.datamodeling.*
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
+import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
 import java.math.BigDecimal
 
 @DynamoDBTable(tableName = "ContaCorrente")
@@ -25,5 +26,11 @@ data class CorrentistaModel(
            numeroConta =  conta.numero,
             saldo = conta.saldo,
             correntista = nome
+    )
+
+    fun toModel() = Correntista(
+            nome = this.nome,
+            idCorrentista = this.conta.numero,
+            conta = this.conta.toDomain()
     )
 }
