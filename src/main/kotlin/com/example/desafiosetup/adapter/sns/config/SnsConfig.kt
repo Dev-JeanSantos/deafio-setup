@@ -5,12 +5,14 @@ import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.client.builder.AwsClientBuilder
 import com.amazonaws.services.sns.AmazonSNS
 import com.amazonaws.services.sns.AmazonSNSClientBuilder
+import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-data class SnsConfig(val amazonSnsProperties: AmazonSnsProperties) {
+class SnsConfig(val amazonSnsProperties: AmazonSnsProperties) {
 
     @Bean
     fun amazonSNSLocal(): AmazonSNS = defaultAmazonSNSClientBuilder()
@@ -21,7 +23,7 @@ data class SnsConfig(val amazonSnsProperties: AmazonSnsProperties) {
     private fun defaultAmazonSNSClientBuilder() = AmazonSNSClientBuilder.standard()
 
 @ConstructorBinding
-@Configuration
+@ConfigurationProperties(prefix = "amazon.sns")
 data class AmazonSnsProperties(
     val endpoint: String = "http://localhost:4566",
     val region: String = "us-east-1",
@@ -35,3 +37,7 @@ data class AmazonSnsProperties(
     fun enpointConfiguration() = AwsClientBuilder.EndpointConfiguration(this.endpoint, this.region)
 
 }
+
+@Configuration
+@EnableConfigurationProperties(AmazonSnsProperties::class)
+class SNSAutoConfiguration

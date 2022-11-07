@@ -23,12 +23,13 @@ data class DataLakePublisher(
     private val logger =  LoggerFactory.getLogger(javaClass)
 
     override fun envioTransferencia(correntista: Correntista) {
-        logger.info("Enviando evento por sns")
 
         val item = DataItemEvent(
                 eventType = DataItemEvent.EventType.EVENT_NAME,
                 data = correntista.toEvent(correntista).objectToMap()
         )
+        logger.info("Enviando mensagem com eventoID - {} com SNS", item.eventId)
+        publishSnsMessage(item)
 
     }
 
@@ -40,7 +41,8 @@ data class DataLakePublisher(
                 .withMessageAttributes(item.getMessagesAttributes())
 
             val messageSend = snsClient.publish(publishRequest)
-            logger.info("fim do envio por sns")
+            logger.info("Finalizando o envio do eventoID - {} e da mensagemID - {} com SNS",
+                    item.eventId, messageSend.messageId)
         }catch (ex: NegocioException){
             logger.warn("Erro ao enviar SNS")
             ex.message
