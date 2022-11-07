@@ -19,7 +19,7 @@ data class CorrentistaModel(
     var conta: ContaModel = ContaModel(BigDecimal.ZERO)
 ) {
     fun toResponse():CorrentistaResponse{
-        return CorrentistaResponse(this.nome, this.pk, this.pk, this.conta.saldo)
+        return CorrentistaResponse(this.nome,this.conta.numero,this.pk,this.conta.saldo)
     }
 
     fun toConta() = Conta(
@@ -32,5 +32,7 @@ data class CorrentistaModel(
             nome = this.nome,
             idCorrentista = this.conta.numero,
             conta = this.conta.toDomain()
+
+
     )
 }
