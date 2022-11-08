@@ -5,6 +5,7 @@ import com.example.desafiosetup.adapter.sns.DataLakePublisher
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
+import com.example.desafiosetup.adapter.web.v1.response.TransferenciaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.toModel
 import com.example.desafiosetup.aplicacao.porta.input.ContaUseCase
 import com.example.desafiosetup.aplicacao.porta.output.CorrentistaRepositorioPorta
@@ -16,7 +17,7 @@ class ContaService(
     private val correntistaRepositorioPorta: CorrentistaRepositorioPorta,
     private val datalakePublisher: DataLakePublisher
 ) : ContaUseCase {
-    override fun transferir(transferenciaRequest: TransferenciaRequest): CorrentistaResponse {
+    override fun transferir(transferenciaRequest: TransferenciaRequest): TransferenciaResponse {
         val contaDebito = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaDebito)
         if (contaDebito.conta.saldo >= transferenciaRequest.valor) {
             val contaCredito =
@@ -26,14 +27,14 @@ class ContaService(
             return debitoSucesso
         }
         println("não entrou!")
-        return contaDebito.toResponse()
+        return contaDebito.toTransferenciaResponse()
     }
 
     override fun processar(
         valor: BigDecimal,
         debito: CorrentistaModel,
         credito: CorrentistaModel
-    ): CorrentistaResponse {
+    ): TransferenciaResponse {
         val debitoConta = debito.toConta()
         val creditoConta = credito.toConta()
 
@@ -48,10 +49,10 @@ class ContaService(
         datalakePublisher.envioTransferencia(creditoNovoSaldo.toModel())
 
         return correntistaRepositorioPorta.transferirValoresEntreContas(debitoNovoSaldo, creditoNovoSaldo)
-            .toResponse()
+            .toTransferenciaResponse()
     }
 
-    override fun confirmarTransferencia(correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): CorrentistaResponse {
+    override fun confirmarTransferencia(correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): TransferenciaResponse {
         val contaConfirmadaTransferencia = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(correntistaTransferenciaRequest.contaTransferencia)
         val contaAtualizada = contaConfirmadaTransferencia.update(contaConfirmadaTransferencia)
 
