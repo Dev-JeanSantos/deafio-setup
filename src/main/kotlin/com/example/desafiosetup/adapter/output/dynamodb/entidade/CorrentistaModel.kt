@@ -2,6 +2,7 @@ package com.example.desafiosetup.adapter.output.dynamodb.entidade
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaRequest
+import com.example.desafiosetup.adapter.web.v1.response.ContaResponse
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.adapter.web.v1.response.TransferenciaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
@@ -30,6 +31,11 @@ data class CorrentistaModel(
         return TransferenciaResponse(this.nome, this.conta.numero, this.pk, this.conta.saldo, this.conta.status)
     }
 
+    fun toContaResponse(): ContaResponse {
+        return ContaResponse(this.nome, this.conta.numero, this.pk, this.conta.status)
+    }
+
+
     fun toConta() = Conta(
             numeroConta = conta.numero,
             saldo = conta.saldo,
@@ -49,7 +55,7 @@ data class CorrentistaModel(
             this.conta.saldo = contaConfirmadaTransferencia.conta.saldo
             this.conta.numero = contaConfirmadaTransferencia.conta.numero
             this.conta.status = Status.APROVADO
-            this.pk = contaConfirmadaTransferencia.conta.numero
+            this.pk = pk
         }
         return contaConfirmadaTransferencia
     }

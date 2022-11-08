@@ -3,6 +3,7 @@ package com.example.desafiosetup.adapter.web.v1.controller
 import com.example.desafiosetup.adapter.web.v1.api.ContaApi
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
+import com.example.desafiosetup.adapter.web.v1.response.ContaResponse
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.adapter.web.v1.response.TransferenciaResponse
 import com.example.desafiosetup.aplicacao.porta.input.ContaUseCase
@@ -14,7 +15,7 @@ class ContaApiController(
     @Autowired
     private val contaUseCase: ContaUseCase
 ) : ContaApi {
-    override fun transferenciaConta(transferenciaRequest: TransferenciaRequest): TransferenciaResponse {
+    override fun transferenciaConta(transferenciaRequest: TransferenciaRequest): ContaResponse {
         return contaUseCase.transferir(transferenciaRequest)
     }
 

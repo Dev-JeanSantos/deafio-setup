@@ -4,6 +4,7 @@ import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaMode
 import com.example.desafiosetup.adapter.sns.DataLakePublisher
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
+import com.example.desafiosetup.adapter.web.v1.response.ContaResponse
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.adapter.web.v1.response.TransferenciaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.toModel
@@ -17,7 +18,7 @@ class ContaService(
     private val correntistaRepositorioPorta: CorrentistaRepositorioPorta,
     private val datalakePublisher: DataLakePublisher
 ) : ContaUseCase {
-    override fun transferir(transferenciaRequest: TransferenciaRequest): TransferenciaResponse {
+    override fun transferir(transferenciaRequest: TransferenciaRequest): ContaResponse {
         val contaDebito = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaDebito)
         if (contaDebito.conta.saldo >= transferenciaRequest.valor) {
             val contaCredito =
@@ -27,14 +28,14 @@ class ContaService(
             return debitoSucesso
         }
         println("não entrou!")
-        return contaDebito.toTransferenciaResponse()
+        return contaDebito.toContaResponse()
     }
 
     override fun processar(
         valor: BigDecimal,
         debito: CorrentistaModel,
         credito: CorrentistaModel
-    ): TransferenciaResponse {
+    ): ContaResponse {
         val debitoConta = debito.toConta()
         val creditoConta = credito.toConta()
 
@@ -49,7 +50,7 @@ class ContaService(
         datalakePublisher.envioTransferencia(creditoNovoSaldo.toModel())
 
         return correntistaRepositorioPorta.transferirValoresEntreContas(debitoNovoSaldo, creditoNovoSaldo)
-            .toTransferenciaResponse()
+            .toContaResponse()
     }
 
     override fun confirmarTransferencia(correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): TransferenciaResponse {
