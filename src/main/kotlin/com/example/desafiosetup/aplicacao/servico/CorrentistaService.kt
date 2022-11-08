@@ -3,7 +3,6 @@ package com.example.desafiosetup.aplicacao.servico
 import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaModel
 import com.example.desafiosetup.adapter.sns.DataLakePublisher
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
-import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
 import com.example.desafiosetup.aplicacao.dominio.modelo.NegocioException
@@ -19,8 +18,8 @@ class CorrentistaService(
 
     ) : CorrentistaUseCase {
 
-    override fun salvarCorrentista(correntistaRequest: CorrentistaRequest): CorrentistaResponse {
-        val correntista = Correntista(correntistaRequest.nome)
+    override fun salvarCorrentista(clienteRequest: CorrentistaRequest): CorrentistaResponse {
+        val correntista = Correntista(clienteRequest.nome)
         val resposta = correntistaRepositorioPorta.salvar(correntista)
 
 //        notificacao.EnviarNotificacaoTransferencia(resposta)

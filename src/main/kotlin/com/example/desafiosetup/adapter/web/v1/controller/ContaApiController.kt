@@ -1,7 +1,7 @@
 package com.example.desafiosetup.adapter.web.v1.controller
 
 import com.example.desafiosetup.adapter.web.v1.api.ContaApi
-import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
+import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.aplicacao.porta.input.ContaUseCase
@@ -17,7 +17,7 @@ class ContaApiController(
         return contaUseCase.transferir(transferenciaRequest)
     }
 
-    override fun confirmaTransferenciaConta(correntistaRequest: CorrentistaRequest): CorrentistaResponse {
-        return contaUseCase.confirmarTransferencia(correntistaRequest)
+    override fun confirmaTransferenciaConta(correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): CorrentistaResponse {
+        return contaUseCase.confirmarTransferencia(correntistaTransferenciaRequest)
     }
 }

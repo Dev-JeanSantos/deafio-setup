@@ -13,8 +13,8 @@ class CorrentistaApiController(
     private val correntistaUseCase: CorrentistaUseCase,
 ):CorrentistaApi{
 
-    override fun salvarConta(correntistaRequest: CorrentistaRequest): CorrentistaResponse{
-        return correntistaUseCase.salvarCorrentista(correntistaRequest)
+    override fun salvarConta(clienteRequest: CorrentistaRequest): CorrentistaResponse{
+        return correntistaUseCase.salvarCorrentista(clienteRequest)
     }
 
     override fun buscarCorrentista(numeroConta: String): CorrentistaResponse {

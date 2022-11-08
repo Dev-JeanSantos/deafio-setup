@@ -2,18 +2,14 @@ package com.example.desafiosetup.aplicacao.servico
 
 import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaModel
 import com.example.desafiosetup.adapter.sns.DataLakePublisher
-import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
+import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
-import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
-import com.example.desafiosetup.aplicacao.dominio.modelo.Erro
 import com.example.desafiosetup.aplicacao.dominio.modelo.toModel
 import com.example.desafiosetup.aplicacao.porta.input.ContaUseCase
 import com.example.desafiosetup.aplicacao.porta.output.CorrentistaRepositorioPorta
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
-import java.util.*
 
 @Service
 class ContaService(
@@ -55,9 +51,10 @@ class ContaService(
             .toResponse()
     }
 
-    override fun confirmarTransferencia(correntistaRequest: CorrentistaRequest): CorrentistaResponse {
-        val contaConfirmadaTransferencia = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(correntistaRequest.toString())
-//        val conta = contaConfirmadaTransferencia.updateStatus()
-        return correntistaRepositorioPorta.confirmarTransferencia(contaConfirmadaTransferencia)
+    override fun confirmarTransferencia(correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): CorrentistaResponse {
+        val contaConfirmadaTransferencia = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(correntistaTransferenciaRequest.contaTransferencia)
+        val contaAtualizada = contaConfirmadaTransferencia.update(contaConfirmadaTransferencia)
+
+        return correntistaRepositorioPorta.confirmarTransferencia(contaAtualizada)
     }
 }

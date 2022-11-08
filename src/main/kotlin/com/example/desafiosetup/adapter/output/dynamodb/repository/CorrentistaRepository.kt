@@ -8,7 +8,6 @@ import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
 import com.example.desafiosetup.aplicacao.porta.output.CorrentistaRepositorioPorta
 import org.springframework.stereotype.Repository
-import java.math.BigDecimal
 
 @Repository
 class CorrentistaRepository(
