@@ -18,9 +18,7 @@ data class Conta(
         if (credito!! <= BigDecimal.ZERO){
             obrigatorio("O Valor de crédito positivo ")
         }
-
         saldo = saldo.add(credito)
-        println("saldoCredito: ${saldo}")
     }
 
     fun  debitar(debito: BigDecimal?){
@@ -33,10 +31,7 @@ data class Conta(
         if (debito > saldo){
             saldoInsuficiente()
         }
-
         saldo = saldo.subtract(debito)
-        println("saldoDebito: ${saldo}")
-
     }
 }
 

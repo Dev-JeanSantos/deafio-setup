@@ -5,7 +5,6 @@ import com.example.desafiosetup.adapter.sns.DataLakePublisher
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.ContaResponse
-import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.adapter.web.v1.response.TransferenciaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.toModel
 import com.example.desafiosetup.aplicacao.porta.input.ContaUseCase
