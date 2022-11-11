@@ -1,4 +1,4 @@
-package com.example.desafiosetup.adapter.sns.config
+package com.example.desafiosetup.adapter.output.sns.config
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.auth.BasicAWSCredentials

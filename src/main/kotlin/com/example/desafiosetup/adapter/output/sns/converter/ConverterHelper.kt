@@ -1,7 +1,7 @@
-package com.example.desafiosetup.adapter.sns.converter
+package com.example.desafiosetup.adapter.output.sns.converter
 
 import com.amazonaws.services.sns.model.MessageAttributeValue
-import com.example.desafiosetup.adapter.sns.event.DataItemEvent
+import com.example.desafiosetup.adapter.output.sns.event.DataItemEvent
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
 import com.fasterxml.jackson.databind.ObjectMapper
 

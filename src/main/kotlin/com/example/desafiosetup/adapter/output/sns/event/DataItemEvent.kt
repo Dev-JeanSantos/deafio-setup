@@ -1,4 +1,4 @@
-package com.example.desafiosetup.adapter.sns.event
+package com.example.desafiosetup.adapter.output.sns.event
 
 import com.fasterxml.jackson.annotation.JsonValue
 import java.time.LocalDateTime
@@ -22,5 +22,7 @@ data class DataItemEvent (
     enum class EventType(@get:JsonValue val value: String){
         EVENT_NAME("transfer-completed-SNS")
     }
-    private fun dataTimeUTCNow() = LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ofPattern(TIMESTAMP_PATTTERN))
+    private fun dataTimeUTCNow() = LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ofPattern(
+            TIMESTAMP_PATTTERN
+    ))
 }

@@ -25,7 +25,7 @@ class CorrentistaRepository(
                 CorrentistaModel::class.java,
                 DynamoDBQueryExpression<CorrentistaModel>()
                     .withKeyConditionExpression("pk = :pk")
-                    .withExpressionAttributeValues(mapOf(":pk" to AttributeValue().withS(numeroConta)))
+                    .withExpressionAttributeValues(mapOf(":pk" to AttributeValue().withS("CORRENTISTA_${numeroConta}")))
         ).first()
     }
 

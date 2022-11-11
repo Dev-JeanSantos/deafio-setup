@@ -17,13 +17,8 @@ fun TransferenciaRequest.toDomain() = Conta(
 fun Correntista.toResponse() = CorrentistaResponse(
         nome = this.nome,
         saldo = this.conta.saldo,
-        idCorrentista = this.idCorrentista,
-        numeroConta = this.nome
+        idCorrentista = excluirPrefixo(this.idCorrentista, "CORRENTISTA_"),
+        numeroConta = excluirPrefixo(this.conta.numero, "CONTA_")
 )
-
-//fun CorrentistaResponse.toTransferenciaResponse() = TransferenciaResponse(
-//        nome = this.nome,
-//        saldo = this.saldo,
-//        idCorrentista = this.idCorrentista,
-//        numeroConta = this.nome
-//)
+private fun excluirPrefixo(key: String, prefixo: String) =
+    if(key.startsWith(prefixo)) key.substring(prefixo.length) else key

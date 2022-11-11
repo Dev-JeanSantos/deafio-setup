@@ -5,6 +5,7 @@ import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaR
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.ContaResponse
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
+import com.example.desafiosetup.adapter.web.v1.response.MenssagemGenericaResponse
 import com.example.desafiosetup.adapter.web.v1.response.TransferenciaResponse
 import com.example.desafiosetup.aplicacao.porta.input.ContaUseCase
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,11 +16,11 @@ class ContaApiController(
     @Autowired
     private val contaUseCase: ContaUseCase
 ) : ContaApi {
-    override fun transferenciaConta(transferenciaRequest: TransferenciaRequest): ContaResponse {
+    override fun transferenciaConta(transferenciaRequest: TransferenciaRequest): MenssagemGenericaResponse {
         return contaUseCase.transferir(transferenciaRequest)
     }
 
-    override fun confirmaTransferenciaConta(correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): TransferenciaResponse {
+    override fun confirmaTransferenciaConta(correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): MenssagemGenericaResponse {
         return contaUseCase.confirmarTransferencia(correntistaTransferenciaRequest)
     }
 }

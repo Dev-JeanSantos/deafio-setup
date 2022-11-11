@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import java.math.BigDecimal
 
 data class CorrentistaTransferenciaRequest(
-    @JsonProperty("conta_transferencia")
-    val contaTransferencia: String
+    @JsonProperty("conta_debito")
+    val contaDebito: String,
+    @JsonProperty("conta_credito")
+    val contaCredito: String,
+    @JsonProperty("recibo_s3")
+    val reciboS3: String
 )

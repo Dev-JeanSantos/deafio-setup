@@ -24,17 +24,15 @@ data class CorrentistaModel(
     var conta: ContaModel = ContaModel(BigDecimal.ZERO, status = Status.PENDENTE)
 ) {
     fun toResponse(): CorrentistaResponse {
-        return CorrentistaResponse(this.nome, this.conta.numero, this.pk, this.conta.saldo)
+        return CorrentistaResponse(this.nome, excluirPrefixo(this.conta.numero, "CONTA_"), excluirPrefixo(this.pk, "CORRENTISTA_"), this.conta.saldo)
     }
 
     fun toTransferenciaResponse(): TransferenciaResponse {
-        return TransferenciaResponse(this.nome, this.conta.numero, this.pk, this.conta.saldo, this.conta.status)
+        return TransferenciaResponse(this.nome, excluirPrefixo(this.conta.numero, "CONTA_"), excluirPrefixo(this.pk, "CORRENTISTA_"), this.conta.saldo, this.conta.status)
     }
-
     fun toContaResponse(): ContaResponse {
-        return ContaResponse(this.nome, this.conta.numero, this.pk, this.conta.status)
+        return ContaResponse(this.nome, excluirPrefixo(this.conta.numero, "CONTA_"), excluirPrefixo(this.pk, "CORRENTISTA_"), this.conta.status)
     }
-
 
     fun toConta() = Conta(
             numeroConta = conta.numero,
@@ -59,4 +57,15 @@ data class CorrentistaModel(
         }
         return contaConfirmadaTransferencia
     }
+
+//    fun toTransferenciaResponse(): TransferenciaResponse {
+//        return TransferenciaResponse(
+//                this.nome,
+//                excluirPrefixo(this.conta.numero, "CONTA_"),
+//                excluirPrefixo(this.pk, "CORRENTISTA_"),
+//                this.conta.status
+//        )
+//    }
+    private fun excluirPrefixo(key: String, prefixo: String) =
+        if(key.startsWith(prefixo)) key.substring(prefixo.length) else key
 }

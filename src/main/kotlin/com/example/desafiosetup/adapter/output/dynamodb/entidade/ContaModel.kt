@@ -16,7 +16,8 @@ data class ContaModel(
     @DynamoDBTypeConvertedEnum()
     var status: Status = Status.PENDENTE
 )
-
-fun ContaModel.toDomain(): ContaType {
-    return ContaType(this.saldo, this.numero, this.status)
-}
+fun ContaModel.toDomain(): ContaType = ContaType(
+        saldo = this.saldo,
+        numero = this.numero,
+        status = this.status
+)

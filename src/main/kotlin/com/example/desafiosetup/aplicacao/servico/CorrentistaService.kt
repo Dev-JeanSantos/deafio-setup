@@ -1,6 +1,7 @@
 package com.example.desafiosetup.aplicacao.servico
 
 import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaModel
+import com.example.desafiosetup.adapter.web.v1.converter.toResponse
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
@@ -16,13 +17,8 @@ class CorrentistaService(
 
     override fun salvarCorrentista(clienteRequest: CorrentistaRequest): CorrentistaResponse {
         val correntista = Correntista(clienteRequest.nome)
-        val resposta = correntistaRepositorioPorta.salvar(correntista)
-        return CorrentistaResponse(
-                nome = resposta.nome,
-                numeroConta = resposta.conta.numero,
-                saldo = resposta.conta.saldo,
-                idCorrentista = resposta.idCorrentista
-        )
+        val resposta = correntistaRepositorioPorta.salvar(correntista).toResponse()
+        return resposta
     }
 
     override fun buscar(numeroConta: String): CorrentistaModel {
