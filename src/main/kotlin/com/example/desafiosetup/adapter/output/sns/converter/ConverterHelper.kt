@@ -19,7 +19,6 @@ private fun String.toMessageAtribute() =
         .withDataType("String")
         .withStringValue(this)
 
-
 fun <T> T.objectToMap(): Map<String, Any>{
     return conversor()
 }
@@ -28,5 +27,4 @@ private inline fun <T, reified R> T.conversor(): R {
     val objMapper = ObjectMapper()
     val value = objMapper.writeValueAsString(this)
     return objMapper.readValue(value, R::class.java)
-
 }

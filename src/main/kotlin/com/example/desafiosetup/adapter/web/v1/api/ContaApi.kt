@@ -2,9 +2,7 @@ package com.example.desafiosetup.adapter.web.v1.api
 
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
-import com.example.desafiosetup.adapter.web.v1.response.ContaResponse
 import com.example.desafiosetup.adapter.web.v1.response.MenssagemGenericaResponse
-import com.example.desafiosetup.adapter.web.v1.response.TransferenciaResponse
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid

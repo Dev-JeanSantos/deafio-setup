@@ -2,6 +2,7 @@ package com.example.desafiosetup.aplicacao.dominio.modelo
 
 import com.example.desafiosetup.adapter.output.dynamodb.entidade.ContaModel
 import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaModel
+import com.example.desafiosetup.aplicacao.dominio.constante.Status
 import java.math.BigDecimal
 import java.util.UUID
 

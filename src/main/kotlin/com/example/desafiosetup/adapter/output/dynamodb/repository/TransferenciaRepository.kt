@@ -4,7 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import com.example.desafiosetup.adapter.output.dynamodb.entidade.TransferenciaModel
-import com.example.desafiosetup.aplicacao.dominio.modelo.Status
+import com.example.desafiosetup.aplicacao.dominio.constante.Status
 import com.example.desafiosetup.aplicacao.dominio.modelo.Transferencia
 import com.example.desafiosetup.aplicacao.porta.input.TransferenciaPorta
 import org.springframework.stereotype.Repository

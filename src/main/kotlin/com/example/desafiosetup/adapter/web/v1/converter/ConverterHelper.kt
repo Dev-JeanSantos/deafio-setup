@@ -2,10 +2,8 @@ package com.example.desafiosetup.adapter.web.v1.converter
 
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
-import com.example.desafiosetup.adapter.web.v1.response.TransferenciaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
-import com.example.desafiosetup.aplicacao.servico.TransferenciaService
 
 
 fun TransferenciaRequest.toDomain() = Conta(

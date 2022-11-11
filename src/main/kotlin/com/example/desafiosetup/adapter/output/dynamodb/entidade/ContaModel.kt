@@ -4,7 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum
 import com.example.desafiosetup.aplicacao.dominio.modelo.ContaType
-import com.example.desafiosetup.aplicacao.dominio.modelo.Status
+import com.example.desafiosetup.aplicacao.dominio.constante.Status
 import java.math.BigDecimal
 
 @DynamoDBDocument

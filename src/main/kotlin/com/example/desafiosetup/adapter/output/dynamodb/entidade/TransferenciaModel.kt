@@ -1,7 +1,7 @@
 package com.example.desafiosetup.adapter.output.dynamodb.entidade
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*
-import com.example.desafiosetup.aplicacao.dominio.modelo.Status
+import com.example.desafiosetup.aplicacao.dominio.constante.Status
 import java.math.BigDecimal
 @DynamoDBTable(tableName = "ContaCorrente")
 data class TransferenciaModel (

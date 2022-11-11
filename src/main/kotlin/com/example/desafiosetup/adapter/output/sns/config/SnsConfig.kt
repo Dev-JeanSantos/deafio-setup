@@ -33,9 +33,7 @@ data class AmazonSnsProperties(
 ){
 
     fun credentialProvider() = AWSStaticCredentialsProvider(BasicAWSCredentials(this.accessKey, this.secretKey))
-
     fun enpointConfiguration() = AwsClientBuilder.EndpointConfiguration(this.endpoint, this.region)
-
 }
 
 @Configuration

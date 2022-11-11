@@ -6,7 +6,6 @@ import com.example.desafiosetup.aplicacao.dominio.modelo.Erro.Companion.saldoIns
 import java.math.BigDecimal
 import java.util.Objects.isNull
 
-
 data class Conta(
     val numeroConta: String,
     var saldo: BigDecimal,

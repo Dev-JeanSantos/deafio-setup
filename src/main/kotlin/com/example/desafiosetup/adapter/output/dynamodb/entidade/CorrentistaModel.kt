@@ -1,14 +1,12 @@
 package com.example.desafiosetup.adapter.output.dynamodb.entidade
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*
-import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.ContaResponse
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 import com.example.desafiosetup.adapter.web.v1.response.TransferenciaResponse
 import com.example.desafiosetup.aplicacao.dominio.modelo.Conta
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
-import com.example.desafiosetup.aplicacao.dominio.modelo.Status
-import com.example.desafiosetup.aplicacao.servico.TransferenciaService
+import com.example.desafiosetup.aplicacao.dominio.constante.Status
 import java.math.BigDecimal
 
 @DynamoDBTable(tableName = "ContaCorrente")
