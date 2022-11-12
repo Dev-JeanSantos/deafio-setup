@@ -10,7 +10,5 @@ data class TransferenciaResponse(
     val numeroConta: String,
     @JsonProperty("id_correntista")
     val idCorrentista: String,
-    val saldo: BigDecimal,
-    @JsonProperty("status_transferencia")
-    val status: Status
+    val saldo: BigDecimal
 )

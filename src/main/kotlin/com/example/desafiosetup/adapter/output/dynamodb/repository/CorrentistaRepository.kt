@@ -18,12 +18,12 @@ class CorrentistaRepository(
         return correntista
     }
 
-    override fun buscarCorrentistaPorNumeroConta(numeroConta: String): CorrentistaModel {
+    override fun buscarCorrentistaPorNumeroConta(numeroConta: String): CorrentistaModel? {
         return dynamoDBMapper.query(
                 CorrentistaModel::class.java,
                 DynamoDBQueryExpression<CorrentistaModel>()
                     .withKeyConditionExpression("pk = :pk")
-                    .withExpressionAttributeValues(mapOf(":pk" to AttributeValue().withS("CORRENTISTA_${numeroConta}")))
+                    .withExpressionAttributeValues(mapOf(":pk" to AttributeValue().withS(numeroConta)))
         ).first()
     }
 

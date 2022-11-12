@@ -12,12 +12,9 @@ data class ContaModel(
     @DynamoDBAttribute(attributeName = "saldo")
     var saldo: BigDecimal = BigDecimal.ZERO,
     @DynamoDBAttribute(attributeName = "numero")
-    var numero: String = "",
-    @DynamoDBTypeConvertedEnum()
-    var status: Status = Status.PENDENTE
+    var numero: String = ""
 )
 fun ContaModel.toDomain(): ContaType = ContaType(
         saldo = this.saldo,
         numero = this.numero,
-        status = this.status
 )

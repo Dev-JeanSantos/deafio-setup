@@ -18,18 +18,17 @@ class TransferenciaRepository(
         dynamoDBMapper.save(transferencia.toModel())
     }
 
-    override fun confirmarTransferencia(contaDebito: String, contaCredito: String, reciboS3: String): BigDecimal {
+    override fun confirmarTransferencia(transferenciaId: String, reciboS3: String): Transferencia {
         val transacao = dynamoDBMapper.query(
                 TransferenciaModel::class.java,
                 DynamoDBQueryExpression<TransferenciaModel>()
-                    .withKeyConditionExpression("pk = :pk and sk = :sk")
+                    .withKeyConditionExpression("pk = :pk")
                     .withExpressionAttributeValues(mapOf(
-                            ":pk" to AttributeValue().withS("TRANSFERENCIA_CORRENTISTA_${contaDebito}"),
-                            ":sk" to AttributeValue().withS("CORRENTISTA_${contaCredito}")
+                            ":pk" to AttributeValue().withS("TRANSFERENCIA_${transferenciaId}"),
                     ))
         ).first()
         dynamoDBMapper.save(transacao.copy(status = Status.APROVADO, caminhoS3 = reciboS3))
-        return transacao.valor
+        return transacao.toTransferencia()
     }
 
 }

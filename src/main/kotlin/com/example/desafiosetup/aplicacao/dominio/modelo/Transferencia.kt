@@ -11,8 +11,8 @@ data class Transferencia(
 
     fun toModel() = TransferenciaModel(
             valor = this.valor,
-            pk = this.contaDebito,
-            sk = this.contaCredito,
+            contaRemetente = this.contaDebito,
+            contaDestino = this.contaCredito,
             caminhoS3 = ""
     )
 }

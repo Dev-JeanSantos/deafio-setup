@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class CorrentistaService(
     private val correntistaRepositorioPorta: CorrentistaRepositorioPorta
-    ) : CorrentistaUseCase {
+) : CorrentistaUseCase {
 
     override fun salvarCorrentista(clienteRequest: CorrentistaRequest): CorrentistaResponse {
         val correntista = Correntista(clienteRequest.nome)
@@ -21,12 +21,7 @@ class CorrentistaService(
         return resposta
     }
 
-    override fun buscar(numeroConta: String): CorrentistaModel {
-        try {
-            val possivelCorrentista = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(numeroConta)
-            return possivelCorrentista
-        } catch (e: NegocioException) {
-            throw e
-        }
+    override fun buscar(numeroConta: String): CorrentistaModel? {
+        return correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(numeroConta)
     }
 }

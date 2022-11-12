@@ -27,5 +27,5 @@ data class ContaType(
 )
 
 fun ContaType.toModel(): ContaModel {
-    return ContaModel(this.saldo, this.numero, this.status)
+    return ContaModel(this.saldo, this.numero)
 }

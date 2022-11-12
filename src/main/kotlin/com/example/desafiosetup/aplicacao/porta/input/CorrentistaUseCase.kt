@@ -7,5 +7,5 @@ import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
 interface CorrentistaUseCase {
     fun salvarCorrentista(clienteRequest: CorrentistaRequest): CorrentistaResponse
 
-    fun buscar(numeroConta: String): CorrentistaModel
+    fun buscar(numeroConta: String): CorrentistaModel?
 }

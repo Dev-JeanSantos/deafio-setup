@@ -8,7 +8,5 @@ data class ContaResponse(
     @JsonProperty("numero_conta")
     val numeroConta: String,
     @JsonProperty("id_correntista")
-    val idCorrentista: String,
-    @JsonProperty("status_transferencia")
-    val status: Status
+    val idCorrentista: String
 )

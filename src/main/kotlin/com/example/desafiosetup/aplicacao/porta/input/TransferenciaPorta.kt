@@ -6,5 +6,5 @@ import java.math.BigDecimal
 interface TransferenciaPorta {
     fun salvarTransferencia(transferencia: Transferencia)
 
-    fun confirmarTransferencia(contaDebito: String, contaCredito: String, reciboS3: String): BigDecimal
+    fun confirmarTransferencia(transferenciaId: String, reciboS3: String): Transferencia
 }

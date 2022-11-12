@@ -4,6 +4,7 @@ import com.example.desafiosetup.adapter.output.sns.DataLakePublisher
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaTransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.request.TransferenciaRequest
 import com.example.desafiosetup.adapter.web.v1.response.MenssagemGenericaResponse
+import com.example.desafiosetup.aplicacao.dominio.modelo.NegocioException
 import com.example.desafiosetup.aplicacao.dominio.modelo.Transferencia
 import com.example.desafiosetup.aplicacao.dominio.modelo.toModel
 import com.example.desafiosetup.aplicacao.porta.input.ContaUseCase
@@ -19,16 +20,21 @@ class ContaService(
     private val datalakePublisher: DataLakePublisher
 ) : ContaUseCase {
     override fun transferir(transferenciaRequest: TransferenciaRequest): MenssagemGenericaResponse {
-        val contaDebito = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaDebito)
-
-        if (contaDebito.conta.saldo >= transferenciaRequest.valor) {
-            val contaCredito =
-                correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaCredito)
-            val transferencia = Transferencia(transferenciaRequest.valor, contaDebito.pk, contaCredito.pk)
-            val debitoSucesso = processarTransferencia(transferencia)
-
-            return MenssagemGenericaResponse("Transferencia sendo processada")
+        correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaDebito)?.let {
+            if (it.conta.saldo >= transferenciaRequest.valor) {
+                val contaCredito =
+                    correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaCredito)
+                if (contaCredito != null) {
+                    val transferencia = Transferencia(transferenciaRequest.valor, it.pk, contaCredito.pk)
+                    processarTransferencia(transferencia)
+                }else{
+                    return MenssagemGenericaResponse("Conta Credito não encontrada")
+                }
+                return MenssagemGenericaResponse("Transferencia sendo processada")
+            }
         }
+
+
         return MenssagemGenericaResponse("Saldo Insuficiente!")
     }
 
@@ -36,30 +42,42 @@ class ContaService(
         valor: BigDecimal,
         debito: String,
         credito: String
-    ){
-        val debito = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(debito)
-        val credito = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(credito)
+    ) {
+        val debitoModel = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(debito)
+        val creditoModel = correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(credito)
 
-        val debitoConta = debito.toConta()
-        val creditoConta = credito.toConta()
+        if (creditoModel != null && debitoModel != null) {
+            try {
+                val debitoConta = debitoModel.toConta()
+                val creditoConta = creditoModel.toConta()
 
-        // Utiliza os metodos de creditar e debitar da classe criada
-        debitoConta.debitar(valor)
-        creditoConta.creditar(valor)
+                debitoConta.debitar(valor)
+                creditoConta.creditar(valor)
 
-        // Cria copias dos registros existentes no banco e sobreescreve os saldos
-        val debitoNovoSaldo = debito.copy(conta = debitoConta.toModel())
-        val creditoNovoSaldo = credito.copy(conta = creditoConta.toModel())
+                val debitoNovoSaldo = debitoModel.copy(conta = debitoConta.toModel())
+                val creditoNovoSaldo = creditoModel.copy(conta = creditoConta.toModel())
 
-        correntistaRepositorioPorta.transferirValoresEntreContas(debitoNovoSaldo, creditoNovoSaldo)
-            .toContaResponse()
+                correntistaRepositorioPorta.transferirValoresEntreContas(debitoNovoSaldo, creditoNovoSaldo)
+                    .toContaResponse()
+            } catch (ex: Exception) {
+                throw NegocioException(mensagem = "Uma das contas não existe!")
+            }
+        }
     }
 
     override fun confirmarTransferencia(correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): MenssagemGenericaResponse {
 
-        val valor = transferenciaPorta.confirmarTransferencia(correntistaTransferenciaRequest.contaDebito, correntistaTransferenciaRequest.contaCredito, correntistaTransferenciaRequest.reciboS3)
-        processar(valor, correntistaTransferenciaRequest.contaDebito, correntistaTransferenciaRequest.contaCredito)
-        return  MenssagemGenericaResponse("Transferencia confirmada com sucesso")
+        try {
+            val transferencia = transferenciaPorta.confirmarTransferencia(
+                    correntistaTransferenciaRequest.transferenciaId,
+                    correntistaTransferenciaRequest.reciboS3
+            )
+            processar(transferencia.valor, transferencia.contaDebito, transferencia.contaCredito)
+            return MenssagemGenericaResponse("Transferencia confirmada com sucesso")
+        } catch (ex: Exception) {
+            MenssagemGenericaResponse("Deu bo")
+            throw ex
+        }
     }
 
     override fun processarTransferencia(transferencia: Transferencia) {

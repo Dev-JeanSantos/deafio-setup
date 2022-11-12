@@ -7,7 +7,7 @@ import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
 interface CorrentistaRepositorioPorta {
     fun salvar(correntista: Correntista): Correntista
 
-    fun buscarCorrentistaPorNumeroConta(numeroConta: String): CorrentistaModel
+    fun buscarCorrentistaPorNumeroConta(numeroConta: String): CorrentistaModel?
 
     fun transferirValoresEntreContas(debito: CorrentistaModel, credito: CorrentistaModel): CorrentistaModel
     fun confirmarTransferencia(contaConfirmadaTransferencia: CorrentistaModel): TransferenciaResponse

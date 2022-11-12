@@ -18,5 +18,5 @@ interface CorrentistaApi {
     @ResponseStatus(HttpStatus.OK)
     fun buscarCorrentista(
         @PathVariable numeroConta: String
-    ): CorrentistaResponse
+    ): CorrentistaResponse?
 }

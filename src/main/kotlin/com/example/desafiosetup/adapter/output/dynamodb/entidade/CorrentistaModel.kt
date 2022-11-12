@@ -19,17 +19,31 @@ data class CorrentistaModel(
     @DynamoDBAttribute(attributeName = "nome")
     var nome: String = "",
     @DynamoDBAttribute(attributeName = "conta")
-    var conta: ContaModel = ContaModel(BigDecimal.ZERO, status = Status.PENDENTE)
+    var conta: ContaModel = ContaModel(BigDecimal.ZERO)
 ) {
     fun toResponse(): CorrentistaResponse {
-        return CorrentistaResponse(this.nome, excluirPrefixo(this.conta.numero, "CONTA_"), excluirPrefixo(this.pk, "CORRENTISTA_"), this.conta.saldo)
+        return CorrentistaResponse(
+                this.nome,
+                excluirPrefixo(this.conta.numero, "CONTA_"),
+                excluirPrefixo(this.pk, "CORRENTISTA_"),
+                this.conta.saldo
+        )
     }
 
     fun toTransferenciaResponse(): TransferenciaResponse {
-        return TransferenciaResponse(this.nome, excluirPrefixo(this.conta.numero, "CONTA_"), excluirPrefixo(this.pk, "CORRENTISTA_"), this.conta.saldo, this.conta.status)
+        return TransferenciaResponse(
+                this.nome,
+                excluirPrefixo(this.conta.numero, "CONTA_"),
+                excluirPrefixo(this.pk, "CORRENTISTA_"),
+                this.conta.saldo
+        )
     }
     fun toContaResponse(): ContaResponse {
-        return ContaResponse(this.nome, excluirPrefixo(this.conta.numero, "CONTA_"), excluirPrefixo(this.pk, "CORRENTISTA_"), this.conta.status)
+        return ContaResponse(
+                this.nome,
+                excluirPrefixo(this.conta.numero, "CONTA_"),
+                excluirPrefixo(this.pk, "CORRENTISTA_"),
+        )
     }
 
     fun toConta() = Conta(
@@ -50,20 +64,11 @@ data class CorrentistaModel(
             this.nome = contaConfirmadaTransferencia.nome
             this.conta.saldo = contaConfirmadaTransferencia.conta.saldo
             this.conta.numero = contaConfirmadaTransferencia.conta.numero
-            this.conta.status = Status.APROVADO
             this.pk = pk
         }
         return contaConfirmadaTransferencia
     }
 
-//    fun toTransferenciaResponse(): TransferenciaResponse {
-//        return TransferenciaResponse(
-//                this.nome,
-//                excluirPrefixo(this.conta.numero, "CONTA_"),
-//                excluirPrefixo(this.pk, "CORRENTISTA_"),
-//                this.conta.status
-//        )
-//    }
     private fun excluirPrefixo(key: String, prefixo: String) =
         if(key.startsWith(prefixo)) key.substring(prefixo.length) else key
 }
