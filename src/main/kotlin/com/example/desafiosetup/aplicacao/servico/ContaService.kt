@@ -25,8 +25,7 @@ class ContaService(
                 val contaCredito =
                     correntistaRepositorioPorta.buscarCorrentistaPorNumeroConta(transferenciaRequest.contaCredito)
                 if (contaCredito != null) {
-                    val transferencia = Transferencia(transferenciaRequest.valor, it.pk, contaCredito.pk)
-                    processarTransferencia(transferencia)
+                    processarTransferencia(transferenciaRequest.valor, it.pk, contaCredito.pk)
                 }else{
                     return MenssagemGenericaResponse("Conta Credito não encontrada")
                 }
@@ -80,8 +79,10 @@ class ContaService(
         }
     }
 
-    override fun processarTransferencia(transferencia: Transferencia) {
-        transferenciaPorta.salvarTransferencia(transferencia)
+    override fun processarTransferencia(valor: BigDecimal, contaDebito: String, contaCredito: String) {
+        val transferencia = Transferencia(valor, contaDebito, contaCredito, transferenciaId = "")
+        val transferenciaId = transferenciaPorta.salvarTransferencia(transferencia)
+        transferencia.transferenciaId = transferenciaId
         datalakePublisher.envioTransferencia(transferencia)
     }
 }

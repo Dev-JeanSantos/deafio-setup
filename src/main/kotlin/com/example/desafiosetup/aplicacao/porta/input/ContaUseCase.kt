@@ -10,5 +10,5 @@ interface ContaUseCase {
     fun transferir(transferenciaRequest:TransferenciaRequest):MenssagemGenericaResponse
     fun processar(valor: BigDecimal, debito: String, credito:String)
     fun confirmarTransferencia(correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): MenssagemGenericaResponse
-    fun processarTransferencia(transferencia: Transferencia)
+    fun processarTransferencia(valor: BigDecimal, contaDebito: String, contaCredito: String)
 }

@@ -10,14 +10,14 @@ import javax.validation.Valid
 @RequestMapping("v1/contas")
 interface ContaApi {
 
-    @PutMapping("/transferencias")
+    @PostMapping("/transferencias")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     fun transferenciaConta(@RequestBody @Valid transferenciaRequest: TransferenciaRequest): MenssagemGenericaResponse
 
-    @PutMapping("/confirmar_transferencias")
+    @PostMapping("/confirmar_transferencias")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    fun confirmaTransferenciaConta(@RequestBody @Valid correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): MenssagemGenericaResponse
+    fun confirmaTransferenciaConta(@RequestBody correntistaTransferenciaRequest: CorrentistaTransferenciaRequest): MenssagemGenericaResponse
 
 }

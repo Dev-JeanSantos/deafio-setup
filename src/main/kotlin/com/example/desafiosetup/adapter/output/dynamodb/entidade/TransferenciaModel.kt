@@ -28,6 +28,7 @@ data class TransferenciaModel (
             valor = this.valor,
             contaDebito = this.contaRemetente,
             contaCredito = this.contaDestino,
+            transferenciaId = this.pk
     )
 }
 

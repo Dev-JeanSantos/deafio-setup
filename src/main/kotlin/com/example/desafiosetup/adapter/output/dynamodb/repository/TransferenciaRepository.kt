@@ -14,8 +14,11 @@ import java.math.BigDecimal
 class TransferenciaRepository(
     private val dynamoDBMapper: DynamoDBMapper
 ) : TransferenciaPorta {
-    override fun salvarTransferencia(transferencia: Transferencia) {
-        dynamoDBMapper.save(transferencia.toModel())
+    override fun salvarTransferencia(transferencia: Transferencia): String {
+        val transferenciaModel = transferencia.toModel()
+        dynamoDBMapper.save(transferenciaModel)
+        return transferenciaModel.pk
+
     }
 
     override fun confirmarTransferencia(transferenciaId: String, reciboS3: String): Transferencia {
