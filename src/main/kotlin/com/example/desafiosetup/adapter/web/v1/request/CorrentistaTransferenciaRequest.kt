@@ -1,9 +1,9 @@
 package com.example.desafiosetup.adapter.web.v1.request
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class CorrentistaTransferenciaRequest(
-    @JsonProperty("transferencia_id")
-    val transferenciaId: String,
-    @JsonProperty("recibo_s3")
-    val reciboS3: String
+    var transferenciaId: String,
+    var reciboS3: String
 )

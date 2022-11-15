@@ -4,6 +4,7 @@ import com.example.desafiosetup.adapter.output.dynamodb.entidade.CorrentistaMode
 import com.example.desafiosetup.adapter.web.v1.converter.toResponse
 import com.example.desafiosetup.adapter.web.v1.request.CorrentistaRequest
 import com.example.desafiosetup.adapter.web.v1.response.CorrentistaResponse
+import com.example.desafiosetup.aplicacao.dominio.modelo.ContaType
 import com.example.desafiosetup.aplicacao.dominio.modelo.Correntista
 import com.example.desafiosetup.aplicacao.dominio.modelo.NegocioException
 import com.example.desafiosetup.aplicacao.porta.input.CorrentistaUseCase
@@ -16,7 +17,7 @@ class CorrentistaService(
 ) : CorrentistaUseCase {
 
     override fun salvarCorrentista(clienteRequest: CorrentistaRequest): CorrentistaResponse {
-        val correntista = Correntista(clienteRequest.nome)
+        val correntista = Correntista(clienteRequest.nome, ContaType(clienteRequest.valor))
         val resposta = correntistaRepositorioPorta.salvar(correntista).toResponse()
         return resposta
     }
